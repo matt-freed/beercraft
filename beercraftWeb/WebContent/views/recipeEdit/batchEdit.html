@@ -1,0 +1,125 @@
+<div ng-controller="batchEditCtrl">
+	<div class="row">
+		<div class="col-md-6">
+			<button class="btn btn-default btn-sm pull-right" ng-click="calculateBatchSchedule()">Generate Schedule</button>
+			<div class="form-group">
+				<label for="brewDate">Brew Date</label> 
+				<input id="brewDate" name="brewDate" type="date" class="form-control" ng-model="recipe.batch.brewDate" placeholder="Brew Date"
+					ng-model-options="{updateOn: 'blur'}"/>
+				<div ng-if="(recipeForm.brewDate.$dirty || recipeForm.$submitted)  && recipeForm.brewDate.$invalid" class="validationMsg">Please enter date in MM/DD/YYYY format</div>
+			</div>
+			<div class="form-group">
+				<label for="secondaryDate">Transfer to Secondary</label> 
+				<input id="secondaryDate" name="secondaryDate" type="date" class="form-control" ng-model="recipe.batch.toSecondaryDate" placeholder="Secondary Date"
+					ng-model-options="{updateOn: 'blur'}"/>
+				<div ng-if="(recipeForm.secondaryDate.$dirty || recipeForm.$submitted)  && recipeForm.secondaryDate.$invalid" class="validationMsg">Please enter date in MM/DD/YYYY format</div>
+			</div>
+			<div class="form-group">
+				<label for="tertiaryDate">Transfer to Tertiary</label> 
+				<input id="tertiaryDate" name="tertiaryDate" type="date" class="form-control" ng-model="recipe.batch.toTertiaryDate" placeholder="Tertiary Date"
+					ng-model-options="{updateOn: 'blur'}"/>
+				<div ng-if="(recipeForm.tertiaryDate.$dirty || recipeForm.$submitted)  && recipeForm.tertiaryDate.$invalid" class="validationMsg">Please enter date in MM/DD/YYYY format</div>
+			</div>
+			<div class="form-group">
+				<label for="bottlekegDate">Bottle/Keg Date</label> 
+				<input id="bottlekegDate" name="bottlekegDate" type="date" class="form-control" ng-model="recipe.batch.toBottleKegDate" placeholder="Bottle/Keg Date"
+					ng-model-options="{updateOn: 'blur'}"/>
+				<div ng-if="(recipeForm.bottlekegDate.$dirty || recipeForm.$submitted)  && recipeForm.bottlekegDate.$invalid" class="validationMsg">Please enter date in MM/DD/YYYY format</div>
+			</div>
+			<div class="form-group">
+				<label for="readyDate">Ready Date</label> 
+				<input id="readyDate" name="readyDate" type="date" class="form-control" ng-model="recipe.batch.readyDate" placeholder="Ready Date"
+					ng-model-options="{updateOn: 'blur'}"/>
+				<div ng-if="(recipeForm.readyDate.$dirty || recipeForm.$submitted)  && recipeForm.readyDate.$invalid" class="validationMsg">Please enter date in MM/DD/YYYY format</div>
+			</div>
+			<div class="form-group">
+				<label for="cost">Cost</label>
+				<div class="input-group">
+					<input id=cost name="cost" type="number" class="form-control" ng-model="recipe.batch.cost" placeholder="Cost"
+						min=0 ng-model-options="{updateOn:'blur'}"/>
+					<div class="input-group-addon">$</div>
+				</div>
+				<div ng-if="(recipeForm.cost.$dirty || recipeForm.$submitted)  && recipeForm.cost.$invalid" class="validationMsg">Cost must be numeric</div>
+			</div>
+		</div>
+		<div class="col-md-6">
+			<table id="actualResultsTable" class="table borderless">
+				<thead>
+					<tr>
+						<th></th>
+						<th>Measured</th>
+						<th>Expected</th>
+						<th>Error %</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td><label>OG</label></td>
+						<td>
+							<input type="number" class="form-control" ng-model="recipe.batch.actualOg" placeholder="Measured OG"
+								min=0 ng-model-options="{updateOn: 'blur'}"
+								ng-change="calculateRecipe()">
+						</td>
+						<td><span ng-bind="recipe.originalGravity | number:3"></span></td>
+						<td><span ng-bind="recipe.batch.ogError | number:0"></span></td>
+					</tr>
+					<tr>
+						<td><label>FG</label></td>
+						<td>
+							<input type="number" name="actualFg" class="form-control" ng-model="recipe.batch.actualFg" placeholder="Measured FG"
+								min=0 ng-model-options="{updateOn: 'blur'}"
+								less-than="{{recipe.batch.actualOg}}" ng-change="calculateRecipe()">
+							<div ng-if="recipeForm.actualFg.$error.lessThan" class="validationMsg">FG must be less than OG</div>	
+						</td>
+						<td><span ng-bind="recipe.finalGravity | number:3"></span></td>
+						<td><span ng-bind="recipe.batch.fgError | number:0"></span></td>
+					</tr>
+					<tr>
+						<td><label>Final Volume</label></td>
+						<td>
+							<div class="input-group">
+								<input type="number" class="form-control" ng-model="recipe.batch.actualVolGal" placeholder="Volume"
+									min=0 ng-model-options="{updateOn: 'blur'}"
+									ng-change="calculateRecipe()">
+								<div class="input-group-addon">gal</div>
+							</div>
+						</td>
+						<td><span ng-bind="recipe.batchSizeGallons"></span></td>
+						<td><span>--</span></td>
+					</tr>
+					<tr>
+						<td><label>ABV %</label></td>
+						<td>
+							<span ng-bind="recipe.batch.actualAbv | number:2"></span>
+						</td>
+						<td><span ng-bind="recipe.abv | number:2"></span></td>
+						<td><span ng-bind="recipe.batch.abvError | number:0"></span></td>
+					</tr>
+					<tr>
+						<td><label>Apparent Attenuation %</label></td>
+						<td>
+							<span ng-bind="recipe.batch.actualAttenuation | number:1"></span>
+						</td>
+						<td><span ng-bind="recipe.attenuation | number:1"></span></td>
+						<td><span> -- </span></td>
+					</tr>
+					<tr>
+						<td><label>Efficiency %</label></td>
+						<td>
+							<span ng-bind="recipe.batch.actualEfficiency | number:2"></span>
+						</td>
+						<td><span ng-bind="recipe.efficiency | number:2"></span></td>
+						<td><span> -- </span></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<label for="procNotes">Process Notes</label>
+				<textarea id="procNotes" ng-model="recipe.batch.processNotes" class="form-control"
+					maxlength="2000"></textarea>
+		</div>
+	</div>
+</div>

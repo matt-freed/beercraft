@@ -1,0 +1,31 @@
+<table id="fermProcTable" class="table borderless">
+	<thead>
+		<tr>
+			<th>Stage</th>
+			<th>Time (Days)</th>
+			<th>Temperature (&deg;F)</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>Primary</td>
+			<td><input type="number" class="form-control" ng-model="recipe.fermentation.primary.agingDays" placeholder="Days" ng-min="0"/></td>
+			<td><input type="number" class="form-control" ng-model="recipe.fermentation.primary.temperatureF" placeholder="&deg;F" ng-min="0"/></td>
+		</tr>
+		<tr>
+			<td>Secondary</td>
+			<td><input type="number" class="form-control" ng-model="recipe.fermentation.secondary.agingDays" placeholder="Days" ng-min="0"/></td>
+			<td><input type="number" class="form-control" ng-model="recipe.fermentation.secondary.temperatureF" placeholder="&deg;F" ng-min="0"/></td>
+		</tr>
+		<tr>
+			<td>Tertiary</td>
+			<td><input type="number" class="form-control" ng-model="recipe.fermentation.tertiary.agingDays" placeholder="Days" ng-min="0"/></td>
+			<td><input type="number" class="form-control" ng-model="recipe.fermentation.tertiary.temperatureF" placeholder="&deg;F" ng-min="0"/></td>
+		</tr>
+		<tr>
+			<td>Conditioning</td>
+			<td><input type="number" class="form-control" ng-model="recipe.fermentation.conditioning.agingDays" placeholder="Days" ng-min="0"/></td>
+			<td><input type="number" class="form-control" ng-model="recipe.fermentation.conditioning.temperatureF" placeholder="&deg;F" ng-min="0"/></td>
+		</tr>
+	</tbody>
+</table>

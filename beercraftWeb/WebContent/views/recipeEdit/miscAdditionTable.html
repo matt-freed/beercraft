@@ -1,0 +1,48 @@
+<div class="panel panel-default">
+	<div class="panel-heading clearfix">
+		<label class="ingTableHeader">Misc Ingredients</label>
+		<plus-button class="pull-right" ng-click="showMiscPicker()"></plus-button>
+	</div>
+	<div class="panel-body respPanelPadding">
+		<div class="form-inline">
+			<div class="table-responsive">
+				<table id="miscAddTable" class="table borderless">
+					<thead>
+						<tr>
+							<th><span>Name</span></th>
+							<th class="hidden-xs"><span>Use</span>
+							<th><span>Amount</span></th>
+							<th class="hidden-xs"><span>Time</span></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="addition in recipe.miscAdditions">
+							<td>
+								<button class="btn btn-default addNameBtn" ng-click="editMisc($index)">{{addition.miscIngredient.name}}</button>
+							</td>
+							<td class="hidden-xs">
+								<select ng-model="addition.miscUse" class="form-control"
+									ng-options="use.value as use.label for use in miscUseTypes" ng-change="calculateRecipe()">
+								</select>
+							</td>
+							<td>
+								<input type="text" class="form-control"	ng-model="addition.amount" placeholder="weight, packages, etc" 
+									maxlength="45"/>
+							</td>
+							<td class="hidden-xs">
+								<div class="input-group">
+									<input type="text" class="form-control"ng-model="addition.time" placeholder="Time" 
+										maxlength="45"/>
+									<div class="input-group-addon">min/days</div>
+								</div>
+							</td>
+							<td>
+								<delete-button ng-click="removeMiscAddition(addition)"></delete-button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>

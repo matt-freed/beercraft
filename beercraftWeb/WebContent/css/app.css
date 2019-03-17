@@ -1,0 +1,187 @@
+/**
+* Required by bootstrap ui
+*/
+.nav, .pagination, .carousel, .panel-title a { 
+	cursor: pointer; 
+}
+/**
+* Common styling/bootstrap overrides
+*/
+body{
+	background-color: rgb(255, 252, 243);
+}
+.btn-default{
+	color: white;
+	background-color: #316A85;
+	border:none;
+}
+.navbar-default{
+	background-color: #D38C47;
+	/*background-color:#C8603C;*/
+}
+ .navbar-default .navbar-brand:hover,
+ .navbar-nav>li>a:hover {
+ 	color:#333;
+ }
+
+.navbar-default .navbar-brand,
+.navbar-default .navbar-nav>li>a{
+	color:white;
+	
+	/*TODO: border color, responsive button*/
+}
+.navbar-default .navbar-nav>.open>a,
+.navbar-default .navbar-nav>.open>a:hover{
+	background-color: #D38C47;
+	color:#333;
+}
+.panel-default>.panel-heading{
+	background-color: #D38C47;
+	border-color: white;
+	color: white;
+}
+.tab-pane>.panel-default{
+	background-color: rgba(0, 0, 0, 0)
+}
+.panel-body, 
+.panel{
+	background-color: rgb(255, 252, 243);
+}
+.nav-tabs>li.active>a,
+.nav-tabs>li.active>a:focus, 
+.nav-tabs>li.active>a:hover{
+	color: white;
+	background-color: #D36447;
+}
+.nav-tabs>li>a{
+	color: #333;
+	background-color: rgba(211, 100, 71, 0.21);
+}
+.input-group-addon{
+	background-color: rgba(255, 229, 103, 0.15);
+}
+.modal-content{
+	/*TODO: switch everything over to this*/
+	background-color: rgb(255, 252, 243);
+}
+.modal-header{
+	background-color: #D38C47;
+	color: white;	
+	border-radius: 6px 6px 0px 0px;
+}
+
+/**
+* Ingredient View
+*/
+#recipeViewTable tbody tr,
+#recipeViewTable th,
+#ingredientTable tbody tr,
+#ingredientTable th{
+	cursor: pointer;
+}
+
+.recipeForm{
+	clear:both;
+}
+
+.modal-body .detailLabel{
+	font-weight:bold;
+}
+
+/**
+* Style View
+*/
+.styleNameCol{
+	max-width:
+}
+textarea[readonly].readonlyNoShade{
+	background-color: white;
+}
+
+/**
+* Modal Picker
+*/
+
+.modal-picker-body{
+	max-height:calc(100vh - 200px);
+	overflow:auto;
+}
+
+/**
+* Recipe Edit page
+*/
+#hopAddTable{
+	min-width: 400px;
+}
+.addNameBtn{
+	width:100%;
+}
+.ingTableHeader{
+	padding-top: 5px;
+}
+.styleWarning{
+	background-color: rgba(211, 100, 71, 0.21);
+}
+
+@media (max-width:768px){
+	
+	#hopAddTable .addNameBtn{
+		max-width:100px;
+	    white-space: normal !important;
+	    word-wrap: break-word;
+	}
+	
+	/*Remove padding on smaller devices */
+	.panel-body.respPanelPadding{
+		padding: 0px;
+	}
+	
+	.navbar-default .navbar-nav .open .dropdown-menu>li>a{
+		color: white;
+	}
+	
+	
+}
+
+@media (max-width:600px){
+	#fermentableAddTable .addNameBtn{
+		max-width:100px;
+	    white-space: normal !important;
+	    word-wrap: break-word;
+	}
+}
+
+#fermentableAddTable{
+	min-width: 315px;
+}
+
+/**
+* Validation
+*/
+.validationMsg{
+	color: #a94442;
+}
+
+.validationForm input.ng-invalid.ng-dirty,
+.validationForm.ng-submitted input.ng-invalid{
+    background-color: #f2dede;
+}
+
+/**
+*
+*/
+textarea.form-control{
+	min-height: 100px;
+}
+
+.tab-pane .panel{
+	padding: 10px;
+}
+
+/**
+* Sign in modal
+*/
+.gSignInCenter{
+	width: 175px;
+	margin: 0 auto;
+}

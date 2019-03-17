@@ -1,0 +1,34 @@
+<div class="panel panel-default">
+	<div class="panel-heading clearfix">
+		<label class="ingTableHeader">Yeast</label> 
+		<plus-button class="pull-right" ng-click="showYeastPicker()"></plus-button>
+	</div>
+	<div class="panel-body respPanelPadding">
+		<div class="form-inline">
+			<div class="table-responsive">
+				<table id="yeastAddTable" class="table borderless">
+					<thead>
+						<tr>
+							<th><span>Name</span></th>
+							<th><span>Amount</span></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="addition in recipe.yeastAdditions">
+							<td>
+								<button class="btn btn-default addNameBtn" ng-click="editYeast($index)">{{addition.yeast.name}}</button>
+							</td>
+							<td>
+								<input type="text" class="form-control"	ng-model="addition.amount" placeholder="packages, volume, etc" 
+									maxlength="45"/>
+							</td>
+							<td>
+								<delete-button ng-click="removeYeastAddition(addition)"></delete-button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>

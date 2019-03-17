@@ -1,0 +1,35 @@
+<div id="yeastDetailModal" class="modal fade">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">
+					<span>&times;</span>
+				</button>
+				<h4 class="modal-title">{{selectedYeast.name}}</h4>
+			</div>
+			<div class="modal-body">
+				<div class="row">
+					<div class="col-md-6">
+						<p><span class="detailLabel">Product Id:</span>{{selectedYeast.productId}}</p>
+						<p><span class="detailLabel">Type:</span>{{selectedYeast.type}}</p>
+						<p><span class="detailLabel">Form: </span>{{selectedYeast.form}}</p>
+						<p><span class="detailLabel">Laboratory: </span>{{selectedYeast.laboratory}}</p>
+						<p><span class="detailLabel">Best For: </span>{{selectedYeast.bestFor}}</p>
+					</div>
+					<div class="col-md-6">
+						<p><span class="detailLabel">Temperature Min (&deg;C): </span>{{selectedYeast.temperatureMinC| number:0}}</p>
+						<p><span class="detailLabel">Temperature Max (&deg;C): </span>{{selectedYeast.temperatureMaxC| number:0}}</p>
+						<p><span class="detailLabel">Flocculation: </span>{{selectedYeast.flocculation}}</p>
+						<p><span class="detailLabel">Attenuation: </span>{{selectedYeast.attenuation | number:0}}%</p>
+					</div>
+				</div>
+				<p><span class="detailLabel">Notes: </span>{{selectedYeast.notes}}</p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">
+					Close
+				</button>
+			</div>
+		</div>
+	</div>
+</div>

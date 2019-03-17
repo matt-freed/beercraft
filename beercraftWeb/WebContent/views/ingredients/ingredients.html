@@ -1,0 +1,44 @@
+<h3>Browse Ingredients</h3>
+<!--  Navigation tabs -->
+<tabset>
+	<tab heading="Hops" ng-click="selectTable(hopTable)"></tab>
+	<tab heading="Fermentables" ng-click="selectTable(fermentableTable)"></tab>
+	<tab heading="Yeast" ng-click="selectTable(yeastTable)"></tab>
+	<tab heading="Misc" ng-click="selectTable(miscTable)"></tab>
+</tabset>
+
+<!-- Search input -->
+<div class="form-group">
+	<div class="panel-body">
+		<input type="text" class="form-control" ng-model="query" placeholder="Search"/>
+	</div>
+</div>
+<!-- Ingredient Table -->
+<div class="table-responsive">
+	<table id="ingredientTable" class="table table-hover">
+		<thead>
+			<tr>
+				<th ng-repeat="heading in selectedIngTable.headings" ng-click="changeSort(selectedIngTable.sort, heading)">
+					<span ng-bind="heading.label"></span>
+					<span class="glyphicon" ng-class="sortClass(selectedIngTable.sort, heading)"></span>
+				</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="ingredient in selectedIngTable.list | filter:query | orderBy: selectedIngTable.sort.column : selectedIngTable.sort.descending" 
+				ng-click="selectedIngTable.openDetail(ingredient)">
+				<td ng-repeat="heading in selectedIngTable.headings">
+					<!-- Use the $eval method to evaluate a dynamically generated expression -->
+					<span ng-bind="$parent.$eval(ingredient[heading.property] + heading.filter)" ng-if="heading.filter"></span>
+					<span ng-bind="ingredient[heading.property]" ng-if="!heading.filter"></span>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+
+<div hop-detail-modal></div>
+<div fermentable-detail-modal></div>
+<div yeast-detail-modal></div>
+<div misc-detail-modal></div>	
+

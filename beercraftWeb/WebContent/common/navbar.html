@@ -1,0 +1,57 @@
+<nav class="navbar navbar-default">
+	<div class="container-fluid">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+				<span class="icon-bar"></span> <span class="icon-bar"></span> <span
+					class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="#/recipeEdit">Beercraft</a>
+		</div>
+		<div id="navbar" class="navbar-collapse collapse">
+			<ul class="nav navbar-nav">
+				<li class="dropdown">
+					<a class="dropdown-toggle" data-toggle="dropdown" role="button">
+					 	Recipes <span class="caret"></span>
+					</a>
+					<ul class="dropdown-menu">
+						<li ng-if="displayEditCurrentRecipeLink()" data-toggle="collapse" data-target="#navbar"
+							ng-click="newRecipe()">
+							<a >Edit Current Recipe</a>
+						</li>
+						<li ng-click="newRecipe()" data-toggle="collapse" data-target="#navbar">
+							<a>New Recipe</a>
+						</li>
+						<li data-toggle="collapse" data-target="#navbar">
+							<a href="#/recipeView" data-toggle="collapse" data-target="#navbar">Browse Recipes</a>
+						</li>
+					</ul>
+				</li>
+				<li data-toggle="collapse" data-target="#navbar">
+					<a href="#/ingredients">Ingredients</a>
+				</li>
+				<li data-toggle="collapse" data-target="#navbar">
+					<a href="#/styles">Styles</a>
+				</li>
+				<li data-toggle="collapse" data-target="#navbar">
+					<a ng-click="showAboutModal()">About <span class="glyphicon glyphicon-info-sign"></span></a>
+				</li>
+				<li data-toggle="collapse" data-target="#navbar">
+					<a ng-click="showHelpModal()">Help <span class="glyphicon glyphicon-question-sign"></span></a>
+				</li>
+			</ul>
+			<ul class="nav navbar-nav navbar-right">
+				<li ng-click="showSignInModal()" ><a ng-hide="isSignedIn">Sign In Using Google <span class="glyphicon glyphicon-lock"></span></a></li>
+				<li class="dropdown" ng-hide="!isSignedIn">
+					<a class="dropdown-toggle" data-toggle="dropdown" role="button">
+						{{getEmail()}} <span class="caret"></span>
+					</a>
+					<ul class="dropdown-menu">
+						<li ng-click="signOut()"><a>Sign Out</a></li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+	</div>
+</nav>	
+<div about-modal></div>
+<div help-modal></div>

@@ -1,0 +1,40 @@
+<h3>Browse Styles</h3>
+
+<div class="table-responsive">
+	<table id="recipeViewTable" class="table table-hover">
+		<thead>
+			<tr>
+				<th ng-click="changeSort('name')">
+					<span>Name</span>
+					<span class="glyphicon" ng-class="sortClass('name')"></span>
+				</th>
+				<th ng-click="changeSort('category')" class="hidden-xs">
+					<span>Category</span>
+					<span class="glyphicon" ng-class="sortClass('category')"></span>
+				</th>
+				<th ng-click="changeSort(['ogMin', 'ogMax'])">
+					<span>OG</span>
+					<span class="glyphicon" ng-class="sortClass(['ogMin', 'ogMax'])"></span>
+				</th>
+				<th ng-click="changeSort(['ibuMin', 'ibuMax'])">
+					<span>IBU</span>
+					<span class="glyphicon" ng-class="sortClass(['ibuMin', 'ibuMax'])"></span>
+				</th>
+				<th ng-click="changeSort(['abvMin', 'abvMax'])">
+					<span>ABV (%)</span>
+					<span class="glyphicon" ng-class="sortClass(['abvMin', 'abvMax'])"></span>
+				</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="style in styles | orderBy: sort.column : sort.descending" ng-click="showDetailModal(style)">
+				<td ng-bind="style.name"></td>
+				<td ng-bind="style.category" class="hidden-xs"></td>
+				<td><span ng-bind="style.ogMin | number:3"></span> - <span ng-bind="style.ogMax | number:3"></span></td>
+				<td><span ng-bind="style.ibuMin"></span> - <span ng-bind="style.ibuMax"></span></td>
+				<td><span ng-bind="style.abvMin"></span> - <span ng-bind="style.abvMax"></span></td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+<div style-detail-modal></div>

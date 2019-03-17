@@ -1,0 +1,57 @@
+<h3>Browse Recipes</h3>
+
+<div class="alert alert-warning" role="alert" ng-show="!isSignedIn">
+	You are currently not signed in. Please <a ng-click="showSignInModal()">Sign In</a> to load your recipes. 
+</div>
+
+<!-- Search input -->
+<div class="form-group">
+	<div class="panel-body">
+		<input type="text" class="form-control" ng-model="query" placeholder="Search"/>
+	</div>
+</div>
+<!-- Recipe Table -->
+<div class="table-responsive">
+	<table id="recipeViewTable" class="table table-hover">
+		<thead>
+			<tr>
+				<th ng-click="changeSort('name')">
+					<span>Name</span>
+					<span class="glyphicon" ng-class="sortClass('name')"></span>
+				</th>
+				<th ng-click="changeSort('type')">
+					<span>Type</span>
+					<span class="glyphicon" ng-class="sortClass('type')"></span>
+				</th>
+				<th ng-click="changeSort('abv')">
+					<span>ABV%</span>
+					<span class="glyphicon" ng-class="sortClass('abv')"></span>
+				</th>
+				<th ng-click="changeSort('ibu')">
+					<span>IBU</span>
+					<span class="glyphicon" ng-class="sortClass('ibu')"></span>
+				</th>
+				<th ng-click="changeSort('styleType.name')">
+					<span>Style</span>
+					<span class="glyphicon" ng-class="sortClass('styleType.name')"></span>
+				</th>
+				<th ng-click="changeSort('enteredDate')">
+					<span>Date Created</span>
+					<span class="glyphicon" ng-class="sortClass('enteredDate')"></span>
+				</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="recipe in recipeList | filter:query | orderBy: sort.column : sort.descending">
+				<td ng-bind="recipe.name" ng-click=loadRecipe(recipe)></td>
+				<td ng-bind="recipe.type" ng-click="loadRecipe(recipe)"></td>
+				<td ng-bind="recipe.abv | number:2" ng-click="loadRecipe(recipe)"></td>
+				<td ng-bind="recipe.ibu | number:0" ng-click="loadRecipe(recipe)"></td>
+				<td ng-bind="recipe.styleType.name" ng-click="loadRecipe(recipe)"></td>
+				<td ng-bind="recipe.enteredDate | date:'shortDate'" ng-click="loadRecipe(recipe)"></td>
+				<td><delete-button ng-click="deleteRecipe(recipe)"></plus-button></td>
+			</tr>
+		</tbody>
+	</table>
+</div>

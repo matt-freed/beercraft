@@ -1,0 +1,228 @@
+<form id="recipeForm" name="recipeForm" class="validationForm" novalidate>
+
+	<div class="btn-group pull-right btn-group-lg" role="group">
+		<button class="btn btn-default" ng-click="saveRecipe()">Save</button>
+		<button class="btn btn-default" ng-click="copyRecipe()">Copy</button>
+	</div>
+	
+	<h3 class="pull-left"><span ng-bind="recipe.name"></span></h3>
+	
+	<div class="row recipeForm">
+		<div class="col-xs-6">
+			<div class="form-group">
+				<label for="name">Name</label>
+				<input id="name" name="name" type="text" class="form-control" ng-model="recipe.name" placeholder="Name"
+					 maxlength="45" ng-required="true" ng-model-options="{updateOn:'blur'}"/>
+				<div ng-if="(recipeForm.name.$dirty || recipeForm.$submitted)  && recipeForm.name.$invalid" class="validationMsg">Name is required</div>
+			</div>
+			<div class="form-group">
+				<label for="author">Author</label>
+				<input id="author" name="author" type="text" class="form-control" ng-model="recipe.author" placeholder="Author"
+					maxlength="45" ng-model-options="{updateOn:'blur'}"/>
+				<div ng-if="(recipeForm.author.$dirty || recipeForm.$submitted)  && recipeForm.author.$invalid" class="validationMsg">Author is required</div>
+			</div>
+			<div class="form-group">
+				<label for="dateCreated">Date Created</label> 
+				<input id="dateCreated" name="dateCreated" type="date" class="form-control" ng-model="recipe.enteredDate" placeholder="Date Created"
+					ng-model-options="{updateOn: 'blur'}"/>
+				<div ng-if="(recipeForm.dateCreated.$dirty || recipeForm.$submitted)  && recipeForm.dateCreated.$invalid" class="validationMsg">Please enter date in MM/DD/YYYY format</div>
+			</div>
+			<div class="form-group">
+				<label for="type">Type</label>
+				<select ng-model="recipe.type" name="recipeType" class="form-control"
+					ng-options="type.value as type.label for type in recipeTypes" ng-change="calculateRecipe()">
+				</select>
+			</div>
+		</div>
+		<div class="col-xs-6">
+			<div class="form-group">
+				<label>Style</label>
+				<select ng-model="recipe.styleType" class="form-control"
+					ng-options="style.name for style in styles track by style.id">
+				</select>
+			</div>
+			<div class="form-group">
+				<label for="boilTime">Boil Time</label>
+				<div class="input-group">
+					<input id="boilTime" name="boilTime" type="number" class="form-control" ng-model="recipe.boilMinutes" placeholder="Boil Time"
+						min=0 ng-required="true" ng-model-options="{updateOn:'blur'}" ng-change="calculateRecipe()"/>
+					<div class="input-group-addon">min</div>
+				</div>
+				<div ng-if="(recipeForm.boilTime.$dirty || recipeForm.$submitted)  && recipeForm.boilTime.$invalid" class="validationMsg">Boil size must be numeric</div>
+			</div>
+			<div class="form-group">
+				<label for="batchSize">Batch Size</label>
+				<div class="input-group">
+					<input id="batchSize" name="batchSize" type="number" class="form-control" ng-model="recipe.batchSizeGallons" placeholder="Batch Size"
+						min=0 ng-required="true" ng-model-options="{updateOn:'blur'}" ng-change="calculateRecipe()"/>
+					<div class="input-group-addon">min</div>
+				</div>
+				<div ng-if="(recipeForm.batchSize.$dirty || recipeForm.$submitted)  && recipeForm.batchSize.$invalid" class="validationMsg">Batch size must be numeric</div>
+			</div>
+			<div class="form-group" >
+				<label for="brewEff">Efficiency</label>
+				<div class="input-group">
+					<input id="brewEff" name="brewEff" type="number" class="form-control" ng-model="recipe.efficiency" placeholder="Efficiency"
+						 min=0 max=100 ng-required="true" ng-model-options="{updateOn:'blur'}" ng-change="calculateRecipe()"/>
+					<div class="input-group-addon">%</div>
+				</div>
+				<div ng-if="(recipeForm.brewEff.$dirty || recipeForm.$submitted)  && recipeForm.brewEff.$invalid" class="validationMsg">Efficiency must be 0 - 100</div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<div ng-include src="'views/recipeEdit/fermentableAdditionTable.html'"></div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<div ng-include src="'views/recipeEdit/hopAdditionTable.html'"></div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<div ng-include src="'views/recipeEdit/yeastAdditionTable.html'"></div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<div ng-include src="'views/recipeEdit/miscAdditionTable.html'"></div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<tabset>
+				<tab heading="Notes">
+					<div class="panel panel-default">
+						<div class="form-group">
+							<label for="notes">Notes</label>
+							<textarea id="notes" ng-model="recipe.notes" class="form-control"
+								maxlength="2000"></textarea>
+							<label for="notes">Tasting Notes</label>
+							<textarea id="notes" ng-model="recipe.tastingNotes" class="form-control"
+								maxlength="2000"></textarea>
+						</div>
+					</div>
+				</tab>
+				<tab heading="Mash Process" ng-show="recipe.type != 'EXTRACT'">
+					<div class="panel panel-default">
+						<div ng-include src="'views/recipeEdit/mashProcess.html'"></div>
+					</div>
+				</tab>
+				<tab heading="Fermentation">
+					<div class="panel panel-default">
+						<div ng-include src="'views/recipeEdit/fermentationProcess.html'"></div>
+					</div>
+				</tab>
+				<tab heading="Brew Log">
+					<div class="panel panel-default">
+						<div ng-include src="'views/recipeEdit/batchEdit.html'"></div>
+					</div>
+				</tab>
+			</tabset>
+		</div>
+	</div>	
+	<div class="row">
+		<div class="col-sm-6">
+			<table id="styleResultsTable" class="table borderless">
+				<thead>
+					<tr>
+						<th></th>
+						<th>Expected</th>
+						<th>Style: Min</th>
+						<th>Style: Max</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-class="getStyleResultsClass(recipe.originalGravity, recipe.styleType.ogMin, recipe.styleType.ogMax)">
+						<td><label>OG</label></td>
+						<td><span ng-bind="recipe.originalGravity | number:3"></span></td>
+						<td><span ng-bind="recipe.styleType.ogMin | number:3"></span></td>
+						<td><span ng-bind="recipe.styleType.ogMax | number:3"></span></td>
+					</tr>
+					<tr ng-class="getStyleResultsClass(recipe.finalGravity, recipe.styleType.fgMin, recipe.styleType.fgMax)">
+						<td><label>FG</label></td>
+						<td><span ng-bind="recipe.finalGravity | number:3"></span></td>
+						<td><span ng-bind="recipe.styleType.fgMin | number:3"></span></td>
+						<td><span ng-bind="recipe.styleType.fgMax | number:3"></span></td>
+					</tr>
+					<tr ng-class="getStyleResultsClass(recipe.abv, recipe.styleType.abvMin, recipe.styleType.abvMax)">
+						<td><label>ABV%</label></td>
+						<td><span ng-bind="recipe.abv | number:2"></span></td>
+						<td><span ng-bind="recipe.styleType.abvMin | number:2"></span></td>
+						<td><span ng-bind="recipe.styleType.abvMax | number:2"></span></td>
+					</tr>
+					<tr ng-class="getStyleResultsClass(recipe.ibu, recipe.styleType.ibuMin, recipe.styleType.ibuMax)">
+						<td><label>IBU</label></td>
+						<td><span ng-bind="recipe.ibu | number:0"></span></td>
+						<td><span ng-bind="recipe.styleType.ibuMin | number:0"></span></td>
+						<td><span ng-bind="recipe.styleType.ibuMax | number:0"></span></td>
+					</tr>
+					<tr ng-class="getStyleResultsClass(recipe.color, recipe.styleType.colorMin, recipe.styleType.colorMax)">
+						<td><label>Color</label></td>
+						<td><span ng-bind="recipe.color | number:2"></span></td>
+						<td><span ng-bind="recipe.styleType.colorMin | number:2"></span></td>
+						<td><span ng-bind="recipe.styleType.colorMax | number:2"></span></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="col-sm-6">
+			<table id="resultsTable" class="table borderless">
+				<thead>
+				</thead>
+				<tbody>
+					<tr>
+						<td><label>Total Grain Bill</label></td>
+						<td><span ng-bind="recipe.grainBillLbs"></span> lbs</td>
+					</tr>
+					<tr>
+						<td><label>Total Hop Weight</label></td>
+						<td><span ng-bind="recipe.hopBillOz"></span> oz</td>
+					</tr>
+					<tr>
+						<td><label>IBU/OG</label></td>
+						<td><span ng-bind="recipe.ibuFgRatio | number:3"></span></td>
+					</tr>
+					<tr>
+						<td><label>Pre Boil Vol</label></td>
+						<td><span ng-bind="recipe.preBoilVolGal | number:2"></span> gal</td>
+					<tr>
+					<tr>
+						<td><label>Pre Boil SG</label></td>
+						<td><span ng-bind="recipe.preBoilSG | number:3"></span></td>
+					</tr>
+					
+				</tbody>
+				
+			</table>
+			
+			
+		</div>
+	</div>
+	<div class="row" style="margin-bottom:15px">
+		<div class="col-md-12 text-center">
+			<button class="btn btn-default btn-lg" ng-click="saveRecipe()">Save</button>
+		</div>
+	</div>
+	
+<div hop-picker-modal></div>
+<div fermentable-picker-modal></div>
+<div yeast-picker-modal></div>
+<div misc-picker-modal></div>
+
+</form>
+
+<form name="hopEditForm" class="validationForm">
+	<div hop-edit-modal></div>
+</form>
+<form name="fermentableEditForm" class="validationForm">
+	<div fermentable-edit-modal></div>
+</form>
+<form name="yeastEditForm" class="validationForm">
+	<div yeast-edit-modal></div>
+</form>
+<form name="miscEditForm" class="validationForm">
+	<div misc-edit-modal></div>
+</form>

@@ -1,0 +1,42 @@
+<div id="hopPickerModal" class="modal fade">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">
+					<span>&times;</span>
+				</button>
+				<h4 class="modal-title">Select Hops</h4>
+			</div>
+			<div class="modal-body modal-picker-body">
+				<div class="form-group">
+					<input type="text" class="form-control" ng-model="query" placeholder="Search"/>
+				</div>
+				<table id="hopIngredientTable" class="table table-hover">
+					<thead>
+						<tr>
+							<th></th>
+							<th><span>Name</span></th>
+							<th><span>Origin</span></th>
+							<th><span>Alpha</span></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="hop in hopList | filter:query">
+							<td>
+								<plus-button ng-click="addHopAddition(hop)"></plus-button>
+							</td>
+							<td ng-bind="hop.name"></td>
+							<td ng-bind="hop.origin"></td>
+							<td ng-bind="hop.alphaAcid | number:2"></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">
+					Close
+				</button>
+			</div>
+		</div>
+	</div>
+</div>

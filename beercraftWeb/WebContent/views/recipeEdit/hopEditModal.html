@@ -1,0 +1,112 @@
+<div id="hopEditModal" class="modal fade">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+					ng-disabled="hopEditForm.$invalid">
+					<span>&times;</span>
+				</button>
+				<h4 class="modal-title">
+					<label>Name</label>
+					<input id="name" name="name" type="text" class="form-control" ng-model="selectedHop.name" placeholder="Name"
+						ng-required="true" maxlength="45" ng-model-options="{updateOn:'blur'}"/>
+				</h4>
+				<div ng-if="hopEditForm.name.$dirty && hopEditForm.name.$invalid" class="validationMsg">Name is required</div>
+			</div>
+			<div class="modal-body">
+				<div class="row">
+					<div class="col-md-6">
+						<div class="form-group">
+							<label>Alpha Acid</label>
+							<div class="input-group">
+								<input id="alpha" name="alpha" type="number" class="form-control" ng-model="selectedHop.alphaAcid" placeholder="Alpha Acid"
+									min=0 max=100 ng-required="true" ng-model-options="{updateOn:'blur'}"/>
+								<div class="input-group-addon">%</div>
+							</div>
+							<div ng-if="hopEditForm.alpha.$dirty && hopEditForm.alpha.$invalid" 
+								class="validationMsg">Alpha Acid must be 0 - 100</div>
+						</div>
+						<div class="form-group">
+							<label>Beta Acid</label>
+							<div class="input-group">
+								<input id="beta" name="beta" type="number" class="form-control" ng-model="selectedHop.betaAcid" placeholder="Beta Acid"
+									min=0 max=100 ng-model-options="{updateOn:'blur'}"/>
+								<div class="input-group-addon">%</div>
+							</div>
+							<div ng-if="hopEditForm.beta.$dirty && hopEditForm.beta.$invalid" 
+								class="validationMsg">Beta Acid must be 0 - 100</div>
+						</div>
+						<div class="form-group">
+							<label>Origin</label>
+							<input id="origin" name="origin" type="text" class="form-control" ng-model="selectedHop.origin" placeholder="Origin"
+								maxlength="45" ng-model-options="{updateOn:'blur'}"/>
+						</div>
+						<div class="form-group">
+							<label>Type</label>
+							<select ng-model="selectedHop.type" name="type" class="form-control"
+								ng-options="type.value as type.label for type in hopTypes"></select>
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="form-group">
+							<label>Humulene</label>
+							<div class="input-group">
+								<input id="hum" name="hum" type="number" class="form-control" ng-model="selectedHop.humulene" placeholder="Humulene"
+									min=0 max=100 ng-model-options="{updateOn:'blur'}"/>
+								<div class="input-group-addon">%</div>
+							</div>
+							<div ng-if="hopEditForm.hum.$dirty && hopEditForm.hum.$invalid" 
+								class="validationMsg">Humulene must be 0 - 100</div>
+						</div>
+						<div class="form-group">
+							<label>Caryophyllene</label>
+							<div class="input-group">
+								<input id="car" name="car" type="number" class="form-control" ng-model="selectedHop.caryophyllene" placeholder="Caryophyllene"
+									min=0 max=100 ng-model-options="{updateOn:'blur'}"/>
+								<div class="input-group-addon">%</div>
+							</div>
+							<div ng-if="hopEditForm.car.$dirty && hopEditForm.car.$invalid" 
+								class="validationMsg">Caryophyllene must be 0 - 100</div>
+						</div>
+						<div class="form-group">
+							<label>Cohumulone</label>
+							<div class="input-group">
+								<input id="coh" name="coh" type="number" class="form-control" ng-model="selectedHop.cohumulone" placeholder="Cohumulone"
+									min=0 max=100 ng-model-options="{updateOn:'blur'}"/>
+								<div class="input-group-addon">%</div>
+							</div>
+							<div ng-if="hopEditForm.coh.$dirty && hopEditForm.coh.$invalid" 
+								class="validationMsg">Cohumulone must be 0 - 100</div>
+						</div>
+						<div class="form-group">
+							<label>Myrcene</label>
+							<div class="input-group">
+								<input id="myr" name="myr" type="number" class="form-control" ng-model="selectedHop.myrcene" placeholder="Myrcene"
+									min=0 max=100 ng-model-options="{updateOn:'blur'}"/>
+								<div class="input-group-addon">%</div>
+							</div>
+							<div ng-if="hopEditForm.myr.$dirty && hopEditForm.myr.$invalid" 
+								class="validationMsg">Myrcene must be 0 - 100</div>
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="hopNotes">Notes</label>
+					<textarea id="hopNotes" ng-model="selectedHop.notes" class="form-control"
+						maxlength="2000"></textarea>
+				</div>
+				<div class="form-group">
+					<label for="hopSubstitutes">Substitutes</label>
+					<textarea id="hopNotes" ng-model="selectedHop.substitutes" class="form-control"
+						maxlength="500"></textarea>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal" 
+					ng-disabled="hopEditForm.$invalid">
+					Close
+				</button>
+			</div>
+		</div>
+	</div>
+</div>

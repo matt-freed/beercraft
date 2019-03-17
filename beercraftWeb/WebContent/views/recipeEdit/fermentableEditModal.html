@@ -1,0 +1,116 @@
+<div id="fermentableEditModal" class="modal fade">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+					ng-disabled="fermentableEditForm.$invalid">
+					<span>&times;</span>
+				</button>
+				<h4 class="modal-title">
+					<label>Name</label>
+					<input id="name" name="name" type="text" class="form-control" ng-model="selectedFermentable.name" placeholder="Name"
+						ng-required="true" maxlength="45" ng-model-options="{updateOn:'blur'}"/>
+				</h4>
+				<div ng-if="fermentableEditForm.name.$dirty && fermentableEditForm.name.$invalid" class="validationMsg">Name is required</div>
+			</div>
+			<div class="modal-body">
+				<div class="row">
+					<div class="col-md-6">
+						<div class="form-group">
+							<label>Type</label>
+							<select ng-model="selectedFermentable.type" name="type" class="form-control"
+								ng-options="type.value as type.label for type in fermentableTypes"></select>
+						</div>
+						<div class="form-group">
+							<label>Origin</label>
+							<input id="origin" name="origin" type="text" class="form-control" ng-model="selectedFermentable.origin" placeholder="Origin"
+								maxlength="45" ng-model-options="{updateOn:'blur'}"/>
+						</div>
+						<div class="form-group">
+							<label>Supplier</label>
+							<input id="supplier" name="supplier" type="text" class="form-control" ng-model="selectedFermentable.supplier" placeholder="Supplier"
+								maxlength="45" ng-model-options="{updateOn:'blur'}"/>
+						</div>
+						<div class="form-group">
+							<label>Max in Batch</label>
+							<div class="input-group">
+								<input id="max" name="max" type="number" class="form-control" ng-model="selectedFermentable.maxInBatch" placeholder="Max in Batch"
+									min=0 max=100 ng-model-options="{updateOn:'blur'}"/>
+								<div class="input-group-addon">%</div>
+							</div>
+							<div ng-if="fermentableEditForm.max.$dirty && fermentableEditForm.max.$invalid" 
+								class="validationMsg">Max in Batch must be 0 - 100</div>
+						</div>
+						<div class="form-group">
+							<label>Color</label>
+							<div class="input-group">
+								<input id="color" name="color" type="number" class="form-control" ng-model="selectedFermentable.color" placeholder="Color"
+									min=0 ng-model-options="{updateOn:'blur'}"/>
+								<div class="input-group-addon">SRM</div>
+							</div>
+							<div ng-if="fermentableEditForm.color.$dirty && fermentableEditForm.color.$invalid" 
+								class="validationMsg">Color must be numeric</div>
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="form-group">
+							<label>Yield</label>
+							<div class="input-group">
+								<input id="yield" name="yield" type="number" class="form-control" ng-model="selectedFermentable.yield" placeholder="Yield"
+									min=0 max=100 ng-model-options="{updateOn:'blur'}"/>
+								<div class="input-group-addon">%</div>
+							</div>
+							<div ng-if="fermentableEditForm.yield.$dirty && fermentableEditForm.yield.$invalid" 
+								class="validationMsg">Yield must be 0 - 100</div>
+						</div>
+						<div class="form-group">
+							<label>Moisture</label>
+							<div class="input-group">
+								<input id="moisture" name="moisture" type="number" class="form-control" ng-model="selectedFermentable.moisture" placeholder="Moisture"
+									min=0 max=100 ng-model-options="{updateOn:'blur'}"/>
+								<div class="input-group-addon">%</div>
+							</div>
+							<div ng-if="fermentableEditForm.moisture.$dirty && fermentableEditForm.moisture.$invalid" 
+								class="validationMsg">Moisture must be 0 - 100</div>
+						</div>
+						<div class="form-group">
+							<label>Fine/Course Diff</label>
+							<div class="input-group">
+								<input id="fine" name="fine" type="number" class="form-control" ng-model="selectedFermentable.fineCourseDiff" placeholder="Fine/Course Diff"
+									min=0 max=100 ng-model-options="{updateOn:'blur'}"/>
+								<div class="input-group-addon">%</div>
+							</div>
+							<div ng-if="fermentableEditForm.fine.$dirty && fermentableEditForm.fine.$invalid" 
+								class="validationMsg">Fine/Course Diff must be 0 - 100</div>
+						</div>
+						<div class="form-group">
+							<label>Diastic Power</label>
+							<input id="power" name="power" type="number" class="form-control" ng-model="selectedFermentable.diasticPower" placeholder="Diastic Power"
+								min=0 ng-model-options="{updateOn:'blur'}"/>
+							<div ng-if="fermentableEditForm.power.$dirty && fermentableEditForm.power.$invalid" 
+								class="validationMsg">Diastic Power must be numeric</div>
+						</div>
+						<div class="form-group">
+							<label>Protein</label>
+							<input id="protein" name="protein" type="number" class="form-control" ng-model="selectedFermentable.protein" placeholder="Protien"
+								min=0 ng-model-options="{updateOn:'blur'}"/>
+							<div ng-if="fermentableEditForm.protein.$dirty && fermentableEditForm.protein.$invalid" 
+								class="validationMsg">Protein must be numeric</div>
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="fermentableNotes">Notes</label>
+					<textarea id="fermentableNotes" ng-model="selectedFermentable.notes" class="form-control"
+						maxlength="2000"></textarea>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal" 
+					ng-disabled="fermentableEditForm.$invalid">
+					Close
+				</button>
+			</div>
+		</div>
+	</div>
+</div>

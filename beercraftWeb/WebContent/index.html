@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html ng-app="beercraftApp">
+	<head>
+	
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<meta name="google-signin-client_id" content="586144694863-5fg7dhp0ahlhil3l6efcdhrihvr8h7q6.apps.googleusercontent.com">
+	
+		
+		<!-- <script type="text/javascript" src="js/vendor/angular.min-1.4.3.js"></script> -->
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular-resource.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular-route.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.13.4/ui-bootstrap-tpls.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+		<script src="https://apis.google.com/js/platform.js"></script>
+		<script type="text/javascript" src="js/app.js"></script>
+		<script type="text/javascript" src="js/services.js"></script>
+		<script type="text/javascript" src="common/commonController.js"></script>
+		<script type="text/javascript" src="views/recipeEdit/recipeEditController.js"></script>
+		<script type="text/javascript" src="views/recipeView/recipeViewController.js"></script>
+		<script type="text/javascript" src="views/recipeEdit/batchEditController.js"></script>
+		<script type="text/javascript" src="views/ingredients/ingredientController.js"></script>
+		<script type="text/javascript" src="views/styles/styleController.js"></script>
+		<script type="text/javascript" src="js/directives.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+		
+		<script type="text/javascript" src="js/vendor/bootstrap-3.3.5.min.js"></script>
+		<link href="css/vendor/bootstrap-3.3.5.min.css" rel="stylesheet" >
+		<link href="css/app.css" rel="stylesheet" >
+	</head>
+	<body>
+	 	<div ng-controller="commonCtrl">
+
+		<div common-nav-bar></div>
+
+			<div class="container">
+			
+				<alert ng-repeat="alert in alerts" type="{{alert.type}}" 
+					close="closeAlert($index)" dismiss-on-timeout="5000">
+					{{alert.msg}}
+				</alert>
+			
+				<div ng-view></div>
+				
+			</div>
+			
+			<div sign-in-modal></div>
+			
+		</div>
+	</body>
+</html>

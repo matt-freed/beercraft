@@ -1,0 +1,36 @@
+<div id="fermentableDetailModal" class="modal fade">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">
+					<span>&times;</span>
+				</button>
+				<h4 class="modal-title" ng-bind="selectedFermentable.name"></h4>
+			</div>
+			<div class="modal-body">
+				<div class="row">
+					<div class="col-md-6">
+						<p><span class="detailLabel">Type:</span>{{selectedFermentable.type}}</p>
+						<p><span class="detailLabel">Origin: </span>{{selectedFermentable.origin}}</p>
+						<p><span class="detailLabel">Supplier: </span>{{selectedFermentable.supplier}}</p>
+						<p><span class="detailLabel">Max in Batch: </span>{{selectedFermentable.maxInBatch| number:0}}%</p>
+						<p><span class="detailLabel">Color: </span>{{selectedFermentable.color}}</p>
+					</div>
+					<div class="col-md-6">
+						<p><span class="detailLabel">Yield: </span>{{selectedFermentable.yield |number:0}}%</p>
+						<p><span class="detailLabel">Moisture: </span>{{selectedFermentable.moisture | number:2}}%</p>
+						<p><span class="detailLabel">Fine/Course Diff: </span>{{selectedFermentable.fineCourseDiff | number:1}}</p>
+						<p><span class="detailLabel">Diastic Power: </span>{{selectedFermentable.diasticPower | number:0}}</p>
+						<p><span class="detailLabel">Protein: </span>{{selectedFermentable.protein | number:2}}</p>
+					</div>
+				</div>
+				<p><span class="detailLabel">Notes: </span>{{selectedFermentable.notes}}</p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">
+					Close
+				</button>
+			</div>
+		</div>
+	</div>
+</div>

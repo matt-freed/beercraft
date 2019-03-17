@@ -1,0 +1,38 @@
+<div id="styleDetailModal" class="modal fade">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">
+					<span>&times;</span>
+				</button>
+				<h4 class="modal-title">
+					<span ng-bind="selectedStyle.name"></span>
+				</h4>
+			</div>
+			<div class="modal-body">
+				<div class="row">
+					<div class="col-md-6">
+						<p><label>Category: </label><span ng-bind="selectedStyle.category"></span></p>
+						<p><label>Type: </label><span ng-bind="selectedStyle.type"></span></p>
+						<p><label>OG: </label><span ng-bind="selectedStyle.ogMin | number:3"></span> - <span ng-bind="selectedStyle.ogMax | number:3"></span></p>
+						<p><label>FG: </label><span ng-bind="selectedStyle.fgMin | number:3"></span> - <span ng-bind="selectedStyle.fgMax | number:3"></span></p>
+					</div>
+					<div class="col-md-6">
+						<p><label>IBU: </label><span ng-bind="selectedStyle.ibuMin"></span> - <span ng-bind="selectedStyle.ibuMax"></span></p>
+						<p><label>ABV: </label><span ng-bind="selectedStyle.abvMin"></span> - <span ng-bind="selectedStyle.abvMax"></span> % </p>
+						<p><label>Color: </label><span ng-bind="selectedStyle.colorMin"></span> - <span ng-bind="selectedStyle.colorMax"></span></p>
+					</div>
+				</div>
+				<p><label>Ingredients: </label><textarea ng-bind="selectedStyle.ingredients" readonly class="form-control readonlyNoShade"></textarea></p>
+				<p><label>Examples: </label><textarea ng-bind="selectedStyle.examples" readonly class="form-control readonlyNoShade"></textarea></p>
+				<p><label>Profile: </label><textarea ng-bind="selectedStyle.profile" readonly class="form-control readonlyNoShade"></textarea></p>
+				<p><label>Notes: </label><textarea ng-bind="selectedStyle.notes" readonly class="form-control readonlyNoShade"></textarea></p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">
+					Close
+				</button>
+			</div>
+		</div>
+	</div>
+</div>

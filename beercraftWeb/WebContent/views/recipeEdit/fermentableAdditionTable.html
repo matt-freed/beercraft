@@ -1,0 +1,47 @@
+<div class="panel panel-default">
+	<div class="panel-heading clearfix">
+		<label class="ingTableHeader">Fermentables</label> 
+		<plus-button class="pull-right" ng-click="showFermentablePicker()"></plus-button>
+	</div>
+	<div class="panel-body respPanelPadding">
+		<div class="form-inline">
+			<div class="table-responsive">
+				<table id="fermentableAddTable" class="table borderless">
+					<thead>
+						<tr>
+							<th><span>Name</span></th>
+							<th><span>Amount</span></th>
+							<th class="hidden-xs"><span>Use</span></th>
+							<th class="hidden-xs"><span>%</span>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="addition in recipe.fermentableAdditions">
+							<td>
+								<button class="btn btn-default addNameBtn" ng-click="editFermentable($index)">{{addition.fermentable.name}}</button>
+							</td>
+							<td>
+								<div class="input-group">
+									<input type="number" class="form-control" ng-model="addition.weightLbs" placeholder="Weight" 
+										min="0" ng-required="true" ng-model-options="{updateOn:'blur'}" ng-change="calculateRecipe()"/>
+									<div class="input-group-addon">lbs</div>
+								</div>
+							</td>
+							<td class="hidden-xs">
+								<select name="fermentableUse" ng-model="addition.use" class="form-control"
+										ng-options="use.value as use.label for use in fermentableUses" ng-change="calculateRecipe()">
+								</select>
+							</td>
+							<td class="hidden-xs">
+								<p class="form-control-static"><span ng-bind="calculateGrainContribution(addition.weightLbs) | number:0"></span>
+							</td>
+							<td>
+								<delete-button ng-click="removeFermentableAddition(addition)"></delete-button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>

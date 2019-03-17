@@ -1,0 +1,37 @@
+<div id="hopDetailModal" class="modal fade">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">
+					<span>&times;</span>
+				</button>
+				<h4 class="modal-title">
+					<span ng-bind="selectedHop.name"></span>
+				</h4>
+			</div>
+			<div class="modal-body">
+				<div class="row">
+					<div class="col-md-6">
+						<p><label>Alpha Acid:</label>{{selectedHop.alphaAcid | number:2}}%</p>
+						<p><label>Beta Acid: </label>{{selectedHop.betaAcid | number:2}}%</p>
+						<p><label>Origin: </label>{{selectedHop.origin}}</p>
+						<p><label>Type: </label>{{selectedHop.type}}</p>
+					</div>
+					<div class="col-md-6">
+						<p><label>Humulene: </label>{{selectedHop.humulene | number:2}}%</p>
+						<p><label>Caryophyllene: </label>{{selectedHop.caryophyllene | number:2}}%</p>
+						<p><label>Cohumulone: </label>{{selectedHop.cohumulone | number:2}}%</p>
+						<p><label>Myrcene: </label>{{selectedHop.myrcene | number:2}}%</p>
+					</div>
+				</div>
+				<p><span class="detailLabel">Notes: </span>{{selectedHop.notes}}</p>
+				<p><span class="detailLabel">Substitutes: </span>{{selectedHop.substitutes}}</p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">
+					Close
+				</button>
+			</div>
+		</div>
+	</div>
+</div>

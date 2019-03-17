@@ -1,0 +1,62 @@
+<div class="panel panel-default">
+	<div class="panel-heading clearfix">
+		<label class="ingTableHeader">Hops</label>
+		<plus-button class="pull-right" ng-click="showHopPicker()">
+	</div>
+	<div class="panel-body respPanelPadding">
+		<div class="form-inline">
+			<div class="table-responsive">
+				<table id="hopAddTable" class="table borderless">
+					<thead>
+						<tr>
+							<th><span>Name</span></th>
+							<th class="hidden-xs"><span>Form</span></th>
+							<th class="hidden-xs"><span>Use</span></th>
+							<th><span>Amount</span></th>
+							<th><span>Boil Time</span></th>
+							<th class="hidden-xs"><span>IBU</span></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="addition in recipe.hopAdditions">
+							<td>
+								<button class="btn btn-default addNameBtn" ng-click="editHop($index)">{{addition.hop.name}}</button>
+							</td>
+							<td class="hidden-xs">
+								<select name="additionForm" ng-model="addition.form" class="form-control"
+									ng-options="form.value as form.label for form in hopForms" ng-change="calculateRecipe()">
+								</select>
+							</td>
+							<td class="hidden-xs">
+								<select name="additionUse" ng-model="addition.use" class="form-control"
+									ng-options="use.value as use.label for use in hopUses" ng-change="calculateRecipe()">
+								</select>
+							</td>
+							<td>
+								<div class="input-group">
+									<input name="additionAmount" type="number" class="form-control" ng-model="addition.weightOz" placeholder="Weight" 
+										min="0" ng-required="true" ng-model-options="{updateOn:'blur'}" ng-change="calculateRecipe()"/>
+									<div class="input-group-addon">oz</div>
+								</div>
+							</td>
+							<td>
+								<div class="input-group">
+									<input name="additionTime" type="number" class="form-control" ng-model="addition.boilTimeMin" placeholder="Boil Time" 
+										min="0" ng-model-options="{updateOn:'blur'}" ng-change="calculateRecipe()"
+										ng-disabled="{{addition.use == 'DRYHOP' || addition.use == 'HOPBACK'}}"/>
+									<div class="input-group-addon">min</div>
+								</div>
+							</td>
+							<td class="hidden-xs">
+								<p class="form-control-static"><span ng-bind="addition.ibuContribution | number:0"></span></p>
+							</td>
+							<td>
+								<delete-button ng-click="removeHopAddition(addition)"></delete-button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
