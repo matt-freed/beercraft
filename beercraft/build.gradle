@@ -1,0 +1,17 @@
+/*
+ * Beercraft EAR build file
+ *
+ */
+
+plugins {
+	id 'ear'
+}
+
+dependencies {
+	deploy project(path: ":beercraftCommon", configuration: 'archives')
+	deploy project(path: ":beercraftServices", configuration: 'archives')
+}
+
+ear {
+	appDirName 'EarContent'
+}

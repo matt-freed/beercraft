@@ -1,0 +1,39 @@
+/*
+ * Beercraft WAR build file
+ *
+ */
+
+plugins {
+	id 'war'
+}
+
+sourceSets {
+	main {
+		java {
+			srcDirs = ['src']
+		}
+	}
+	test {
+		java {
+			srcDirs = ['test']
+		}
+	}
+}
+
+war {
+	webAppDirName='WebContent'
+}
+
+dependencies {
+	providedCompile 'org.apache.commons:commons-lang3:3.8.1'
+
+	providedCompile 'com.google.api-client:google-api-client:1.28.0'
+
+	providedCompile 'javax:javaee-api:7.0'
+    //runtime?
+
+	providedCompile project(':beercraftCommon')
+
+	// Use JUnit test framework
+	testImplementation 'junit:junit:4.12'
+}
