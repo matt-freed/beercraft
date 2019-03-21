@@ -1,0 +1,14 @@
+/*
+* Gradle Build for Beercraft root
+*/
+
+allprojects {
+
+}
+
+subprojects {
+	repositories {
+		jcenter()
+	}
+}
+
