@@ -7,6 +7,8 @@ bin
 
 #Eclipse workspace files
 .settings
+.project
+.classpath
 
 # Compiled class file
 *.class
