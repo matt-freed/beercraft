@@ -20,15 +20,17 @@ sourceSets {
 }
 
 dependencies {
+	//Need to be included at runtime
 	implementation 'org.hibernate:hibernate-core:4.3.10.Final'
-        //Are both these needed?
 	implementation	'org.apache.logging.log4j:log4j-api:2.11.2'
 	implementation	'org.apache.logging.log4j:log4j-core:2.11.2'
 	implementation	'org.apache.commons:commons-lang3:3.8.1'
 	implementation	'commons-beanutils:commons-beanutils:1.9.3'
 
-	implementation 'javax:javaee-api:7.0'
+	//Compile only dependencies
+	compileClasspath 'javax:javaee-api:7.0'
 
+	//Test dependencies
 	testImplementation 'junit:junit:4.12'
 }
 

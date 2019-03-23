@@ -9,9 +9,13 @@ plugins {
 
 dependencies {
 	deploy project(path: ":beercraftCommon", configuration: 'archives')
+	earlib project(path: ":beercraftCommon")	//place dependencies in earlib
+	
 	deploy project(path: ":beercraftServices", configuration: 'archives')
+	earlib project(path: ":beercraftServices", configuration: 'compile')
 }
 
 ear {
 	appDirName 'EarContent'
+	libDirName 'lib'
 }

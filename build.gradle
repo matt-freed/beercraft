@@ -3,9 +3,11 @@
 */
 
 allprojects {
-
+	//For better eclipse integration
+	apply plugin: 'eclipse-wtp'
 }
 
+//EAR project cannot have java plugin applied to it
 configure(subprojects.findAll {it.name != 'beercraft'}) {
 	apply plugin: 'java'
 	
