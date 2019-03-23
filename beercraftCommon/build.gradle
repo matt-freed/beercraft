@@ -3,13 +3,6 @@
  *
  */
 
-plugins {
-	id 'java'
-}
-
-sourceCompatibility = '1.8'
-targetCompatibility = '1.8'
-
 sourceSets {
 	main {
 		java {
@@ -35,7 +28,6 @@ dependencies {
 	implementation	'commons-beanutils:commons-beanutils:1.9.3'
 
 	implementation 'javax:javaee-api:7.0'
-	//runtime?
 
 	testImplementation 'junit:junit:4.12'
 }
