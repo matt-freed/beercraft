@@ -28,9 +28,12 @@ dependencies {
 	//Needed to be included at runtime
 	providedCompile 'org.apache.commons:commons-lang3:3.8.1'
 	providedCompile 'com.google.api-client:google-api-client:1.28.0'
+	providedCompile	'org.apache.logging.log4j:log4j-core:2.11.2'
+	providedCompile	'org.apache.logging.log4j:log4j-api:2.11.2'
+	providedCompile	'org.apache.logging.log4j:log4j-web:2.11.2'
 
 	//Compile only dependencies
-	compileClasspath 'javax:javaee-api:7.0'
+	compileClasspath 'javax:javaee-api:8.0'
 	compileClasspath project(':beercraftCommon')
 
 	//Test dependencies

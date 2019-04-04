@@ -16,6 +16,7 @@ public class BeercraftServiceApplication extends Application{
 	
 	private final Set<Class<?>> classes = new HashSet<>();
 
+	@Override
 	public Set<Class<?>> getClasses() {
 		classes.add(IngredientResource.class);
 		classes.add(RecipeResource.class);
