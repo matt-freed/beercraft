@@ -11,8 +11,8 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.MediaType;
 
-import com.beercom.ejb.UserService;
-import com.beercom.entity.User;
+import com.beercraft.ejb.UserService;
+import com.beercraft.ejb.entity.User;
 import com.beercraft.web.util.GoogleAuthUtil;
 
 @RequestScoped

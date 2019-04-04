@@ -13,8 +13,8 @@
 		</Console>
 
 		<RollingFile name="rollingFileLogger"
-			fileName="${sys:LOG_DIR}/beercraftCommon.log"
-			filePattern="${sys:LOG_DIR}/beercraftCommon-%d{yyyy-MM-dd}-%i.log">
+			fileName="${sys:LOG_DIR}/beercraft.log"
+			filePattern="${sys:LOG_DIR}/beercraft-%d{yyyy-MM-dd}-%i.log">
 			<PatternLayout pattern="${LOG_PATTERN}" />
 			<Policies>
 				<SizeBasedTriggeringPolicy size="10MB" />
@@ -30,7 +30,7 @@
 			<AppenderRef ref="consoleLogger"/>
 		</Root>
 
-		<Logger name="com.beercom" level="DEBUG">
+		<Logger name="com.beercraft" level="DEBUG">
 			<AppenderRef ref="consoleLogger" />
 			<AppenderRef ref="rollingFileLogger" />
 		</Logger>

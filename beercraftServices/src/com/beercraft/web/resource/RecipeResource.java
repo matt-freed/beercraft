@@ -19,15 +19,15 @@ import javax.ws.rs.core.MediaType;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.beercom.ejb.RecipeCalculator;
-import com.beercom.ejb.RecipeService;
-import com.beercom.entity.FermentableAddition;
-import com.beercom.entity.HopAddition;
-import com.beercom.entity.MashStep;
-import com.beercom.entity.MiscIngredientAddition;
-import com.beercom.entity.Recipe;
-import com.beercom.entity.User;
-import com.beercom.entity.YeastAddition;
+import com.beercraft.ejb.RecipeCalculator;
+import com.beercraft.ejb.RecipeService;
+import com.beercraft.ejb.entity.FermentableAddition;
+import com.beercraft.ejb.entity.HopAddition;
+import com.beercraft.ejb.entity.MashStep;
+import com.beercraft.ejb.entity.MiscIngredientAddition;
+import com.beercraft.ejb.entity.Recipe;
+import com.beercraft.ejb.entity.User;
+import com.beercraft.ejb.entity.YeastAddition;
 import com.beercraft.web.util.GoogleAuthUtil;
 
 /**

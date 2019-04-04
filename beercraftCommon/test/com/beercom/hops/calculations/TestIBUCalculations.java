@@ -3,8 +3,8 @@ package com.beercom.hops.calculations;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.beercom.calculation.RagerMethod;
-import com.beercom.calculation.TinsethMethod;
+import com.beercraft.ejb.calculation.RagerMethod;
+import com.beercraft.ejb.calculation.TinsethMethod;
 
 public class TestIBUCalculations {
 

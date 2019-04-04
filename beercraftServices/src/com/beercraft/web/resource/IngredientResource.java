@@ -9,21 +9,16 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
-import com.beercom.ejb.IngredientService;
-import com.beercom.entity.Fermentable;
-import com.beercom.entity.Hop;
-import com.beercom.entity.MiscIngredient;
-import com.beercom.entity.Style;
-import com.beercom.entity.Yeast;
+import com.beercraft.ejb.IngredientService;
+import com.beercraft.ejb.entity.Fermentable;
+import com.beercraft.ejb.entity.Hop;
+import com.beercraft.ejb.entity.MiscIngredient;
+import com.beercraft.ejb.entity.Style;
+import com.beercraft.ejb.entity.Yeast;
 
 @RequestScoped
 @Path("/ingredients")
 public class IngredientResource {
-	
-	private static final Logger log = LogManager.getLogger(IngredientResource.class);
 
 	@Inject
 	private IngredientService ingredientService;
@@ -32,7 +27,6 @@ public class IngredientResource {
 	@Path("/hops")
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<Hop> getHops(){
-		log.debug("Getting all hops");
 		List<Hop> hops = ingredientService.getAllHops();
 		return hops;
 	}

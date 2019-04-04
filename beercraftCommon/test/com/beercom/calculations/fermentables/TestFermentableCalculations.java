@@ -5,8 +5,8 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.beercom.calculation.FermentableCalculator;
-import com.beercom.calculation.FermentableCalculatorImpl;
+import com.beercraft.ejb.calculation.FermentableCalculator;
+import com.beercraft.ejb.calculation.FermentableCalculatorImpl;
 
 
 public class TestFermentableCalculations {

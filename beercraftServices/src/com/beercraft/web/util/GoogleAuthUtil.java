@@ -8,7 +8,7 @@ import javax.enterprise.context.ApplicationScoped;
 
 import org.apache.commons.lang3.StringUtils;
 
-import com.beercom.entity.User;
+import com.beercraft.ejb.entity.User;
 import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken;
 import com.google.api.client.googleapis.auth.oauth2.GoogleIdTokenVerifier;
 import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken.Payload;
@@ -24,7 +24,6 @@ import com.google.api.client.json.jackson2.JacksonFactory;
 @ApplicationScoped
 public class GoogleAuthUtil {
 	
-	private final String[] DOMAIN_LIST = {"localhost", "mattfreed.net"}; 
 	private final String CLIENT_ID = "586144694863-5fg7dhp0ahlhil3l6efcdhrihvr8h7q6.apps.googleusercontent.com";
 
 	/**
@@ -52,9 +51,7 @@ public class GoogleAuthUtil {
 			GoogleIdToken idToken = verifier.verify(tokenId);
 			if(idToken != null){
 				payload = idToken.getPayload();
-				//TODO: get this working for localhost
-				if(!payload.getAuthorizedParty().equals(CLIENT_ID) /*||
-					 !Arrays.asList(DOMAIN_LIST).contains(payload.getHostedDomain())*/){
+				if(!payload.getAuthorizedParty().equals(CLIENT_ID)){
 					throw new GeneralSecurityException();
 				}		
 			}
