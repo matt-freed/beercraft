@@ -1,10 +1,12 @@
 package com.beercom.entity;
 
+import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
@@ -13,7 +15,6 @@ import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlTransient;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
@@ -47,8 +48,8 @@ public class YeastAddition extends CustomizableEntity{
 	@Column(name="add_to_secondary")
 	private Boolean addToSecondary;
 	
-	@XmlTransient
-	@ManyToOne
+	@JsonbTransient
+	@ManyToOne(fetch = FetchType.LAZY)	//No need to load this if you are just loading the addition
 	@JoinColumn(name="recipe_id", nullable=false)
 	private Recipe recipe;
 	

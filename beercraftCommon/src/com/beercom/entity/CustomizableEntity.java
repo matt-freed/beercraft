@@ -3,20 +3,20 @@ package com.beercom.entity;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Transient;
-import javax.xml.bind.annotation.XmlTransient;
 
 
 @MappedSuperclass
 public abstract class CustomizableEntity extends BaseEntity{
 	
-	@XmlTransient
+	@JsonbTransient
 	@Column(name="is_builtin", nullable=false)
 	private Boolean isBuiltIn;
 	
-	@XmlTransient
+	@JsonbTransient
 	@Column(name="owner_id", length=45, nullable=false)
 	private String owner;
 	
@@ -24,7 +24,7 @@ public abstract class CustomizableEntity extends BaseEntity{
 	private Long derivedFrom;
 
 	@Transient
-	@XmlTransient
+	@JsonbTransient
 	private final List<String> excludedCompFields = Arrays.asList("id", "userId", "createdDate", "maintDate", "maintId", "derivedFrom");
 
 	public Long getDerivedFrom() {

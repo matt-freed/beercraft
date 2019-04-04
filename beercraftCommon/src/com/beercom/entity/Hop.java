@@ -21,7 +21,7 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
  *
  */
 @Entity
-@Table(name="hop")
+@Table(name="hop", catalog="beercraft_test")
 public class Hop extends CustomizableEntity {
 	
 	@NotNull @Size(min=0, max=150)

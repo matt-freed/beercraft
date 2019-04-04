@@ -11,8 +11,8 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.MediaType;
 
+import com.beercom.ejb.UserService;
 import com.beercom.entity.User;
-import com.beercom.facade.entity.UserFacade;
 import com.beercraft.web.util.GoogleAuthUtil;
 
 @RequestScoped
@@ -23,7 +23,7 @@ public class UserResource {
 	private GoogleAuthUtil authUtil;
 	
 	@Inject
-	private UserFacade userFacade;
+	private UserService userFacade;
 	
 	/**
 	 * Registers a user on the db if they do not exist,

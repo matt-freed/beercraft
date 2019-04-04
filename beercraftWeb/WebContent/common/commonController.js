@@ -41,7 +41,7 @@ controller('commonCtrl', function($scope, $q, $location, $window, ingredientList
 	 * Load styles separately, as it takes longer to download and is not critical for 
 	 * immediate use of the app
 	 */
-	recipeService.getStyles().
+	ingredientListService.listStyles().
 		then(function(response){
 			$scope.styles = response.data;
 	});

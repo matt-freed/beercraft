@@ -3,8 +3,8 @@ package com.beercraft.web.resource;
 import java.security.GeneralSecurityException;
 import java.util.List;
 
-import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.ws.rs.Consumes;
@@ -16,17 +16,18 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import com.beercom.ejb.RecipeCalculator;
+import com.beercom.ejb.RecipeService;
 import com.beercom.entity.FermentableAddition;
 import com.beercom.entity.HopAddition;
 import com.beercom.entity.MashStep;
 import com.beercom.entity.MiscIngredientAddition;
 import com.beercom.entity.Recipe;
-import com.beercom.entity.Style;
 import com.beercom.entity.User;
 import com.beercom.entity.YeastAddition;
-import com.beercom.facade.CalculationFacade;
-import com.beercom.facade.entity.RecipeFacade;
-import com.beercom.util.CDIUtil;
 import com.beercraft.web.util.GoogleAuthUtil;
 
 /**
@@ -36,33 +37,18 @@ import com.beercraft.web.util.GoogleAuthUtil;
 @RequestScoped
 @Path("/recipe")
 public class RecipeResource {
+	
+	private static final Logger log = LogManager.getLogger(RecipeResource.class);
 
-	private RecipeFacade recipeFacade;
+	@Inject
+	private RecipeService recipeService;
 	
-	private CalculationFacade calculationFacade;
+	@Inject
+	private RecipeCalculator recipeCalculator;
 	
+	@Inject
 	private GoogleAuthUtil authUtil;
-	
-	/**
-	 * Jersey does not play nice with Weld CDI (It uses H2K
-	 * when you specify the @Valid annotation).
-	 * So we have to manually inject our dependencies
-	 */
-	@PostConstruct
-	public void init(){
-		recipeFacade = CDIUtil.findBean(RecipeFacade.class);
-		calculationFacade = CDIUtil.findBean(CalculationFacade.class);
-		authUtil = CDIUtil.findBean(GoogleAuthUtil.class);
-	}
 
-	@GET
-	@Path("/styles")
-	@Produces(MediaType.APPLICATION_JSON)
-	public List<Style> getStyles(){
-		List<Style> styles = recipeFacade.getAllStyles();
-		return styles;
-	}
-	
 	/**
 	 * Calculates recipe 
 	 */
@@ -72,10 +58,10 @@ public class RecipeResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Recipe calculateRecipe(@NotNull @Valid Recipe recipe){
 
-		calculationFacade.calculateRecipe(recipe);
+		recipeCalculator.calculateRecipe(recipe);
 		
 		//Changing recipe parameters will cause batch expectations to change
-		calculationFacade.calculateBatch(recipe);
+		recipeCalculator.calculateBatch(recipe);
 		
 		return recipe;
 	}
@@ -99,9 +85,10 @@ public class RecipeResource {
 		
 		formatRecipeForSave(recipe, user);
 		try{
-			recipeFacade.saveRecipe(recipe, user);
+			recipeService.saveRecipe(recipe, user);
 		}
 		catch(SecurityException e){
+			log.warn("Unauthorized user", e);
 			throw new NotAuthorizedException("User does not have the rights to save this recipe");
 		}
 		
@@ -116,13 +103,13 @@ public class RecipeResource {
 		
 		User user = authenticate(tokenId);
 		
-		Recipe copiedRecipe = recipeFacade.copyRecipe(recipe);
+		Recipe copiedRecipe = recipeService.copyRecipe(recipe);
 		
 		calculateRecipe(recipe);
 		
 		formatRecipeForSave(recipe, user);
 		
-		recipeFacade.saveRecipe(copiedRecipe, user);
+		recipeService.saveRecipe(copiedRecipe, user);
 		
 		return copiedRecipe;
 		
@@ -135,7 +122,7 @@ public class RecipeResource {
 		
 		User user = authenticate(tokenId);
 		
-		List<Recipe> recipes = recipeFacade.getRecipesForUser(user);
+		List<Recipe> recipes = recipeService.getRecipesForUser(user);
 		
 		return recipes;
 	}
@@ -144,20 +131,19 @@ public class RecipeResource {
 	@Path("/delete")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public String deleteRecipe(@NotNull Recipe recipe, @HeaderParam("Authorization") String tokenId){
+	public void deleteRecipe(@NotNull Recipe recipe, @HeaderParam("Authorization") String tokenId){
 		
 		User user = authenticate(tokenId);
 		
 		formatRecipeForSave(recipe, user);
 		
 		try{
-			recipeFacade.deleteRecipe(recipe, user);
+			recipeService.deleteRecipe(recipe, user);
 		}
 		catch(SecurityException e){
+			log.warn("Unauthorized user", e);
 			throw new NotAuthorizedException("User does not have the rights to save this recipe");
 		}
-		//TODO: why are we returning this?
-		return recipe.getId().toString();
 	}
 	
 	/**
@@ -203,6 +189,7 @@ public class RecipeResource {
 		try {
 			user = authUtil.getUserInfo(tokenId);
 		} catch (GeneralSecurityException e) {
+			log.warn("Unauthorized user", e);
 			throw new NotAuthorizedException("User could not be authorized");
 		}
 		return user;

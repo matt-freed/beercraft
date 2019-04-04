@@ -2,6 +2,7 @@ package com.beercom.entity;
 
 import java.util.Date;
 
+import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -12,7 +13,6 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlTransient;
 
 import org.hibernate.annotations.Immutable;
 
@@ -23,7 +23,7 @@ public class Batch extends CustomizableEntity{
 	@Immutable
 	@OneToOne
 	@JoinColumn(name="recipe_id")
-	@XmlTransient
+	@JsonbTransient
 	private Recipe recipe;
 	
 	@Column(name="brew_date")

@@ -32,6 +32,13 @@ factory('ingredientListService', function($http) {
 				method: 'GET',
 				url: '/beercraftServices/rest/ingredients/misc'
 			});
+		},
+		listStyles: function(){
+			return	$http({
+				cache:true,
+				method: 'GET',
+				url: '/beercraftServices/rest/ingredients/styles'
+			});
 		}
 	};
 	
@@ -327,13 +334,6 @@ factory('recipeService', function($http, googleAuthService) {
 				"timeMin":40,
 				"rampTimeMin":4
 			};
-		},
-		getStyles: function(){
-			return $http({
-				method: 'GET',
-				cache:true,
-				url: '/beercraftServices/rest/recipe/styles',
-			});
 		},
 		calculateRecipe: function(recipe){
 			return $http({
